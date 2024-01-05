@@ -1,6 +1,6 @@
-package com.axreng.backend.service;
+package com.claudemir.backend.service;
 
-import com.axreng.backend.response.CawlGetResponse;
+import com.claudemir.backend.response.CawlGetResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

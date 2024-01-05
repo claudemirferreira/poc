@@ -1,4 +1,4 @@
-package com.axreng.backend.util;
+package com.claudemir.backend.util;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package com.axreng.backend.util;
+package com.claudemir.backend.util;
 
 import java.util.Random;
 

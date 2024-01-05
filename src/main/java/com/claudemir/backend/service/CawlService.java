@@ -1,10 +1,10 @@
-package com.axreng.backend.service;
+package com.claudemir.backend.service;
 
-import com.axreng.backend.request.CawlCreateRequest;
-import com.axreng.backend.response.CawlCreateResponse;
-import com.axreng.backend.response.CawlGetResponse;
-import com.axreng.backend.util.BufferedReaderUtil;
-import com.axreng.backend.util.GenerateIdUtil;
+import com.claudemir.backend.request.CawlCreateRequest;
+import com.claudemir.backend.response.CawlCreateResponse;
+import com.claudemir.backend.response.CawlGetResponse;
+import com.claudemir.backend.util.BufferedReaderUtil;
+import com.claudemir.backend.util.GenerateIdUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

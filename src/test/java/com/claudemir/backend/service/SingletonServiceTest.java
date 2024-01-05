@@ -1,6 +1,6 @@
-package com.axreng.backend.service;
+package com.claudemir.backend.service;
 
-import com.axreng.backend.response.CawlGetResponse;
+import com.claudemir.backend.response.CawlGetResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

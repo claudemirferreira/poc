@@ -1,7 +1,7 @@
-package com.axreng.backend;
+package com.claudemir.backend;
 
-import com.axreng.backend.request.CawlCreateRequest;
-import com.axreng.backend.service.CawlService;
+import com.claudemir.backend.request.CawlCreateRequest;
+import com.claudemir.backend.service.CawlService;
 import com.google.gson.Gson;
 
 import static spark.Spark.get;

@@ -1,4 +1,4 @@
-package com.axreng.backend.response;
+package com.claudemir.backend.response;
 
 import java.util.List;
 

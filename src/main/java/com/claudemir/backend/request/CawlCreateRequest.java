@@ -1,4 +1,4 @@
-package com.axreng.backend.request;
+package com.claudemir.backend.request;
 
 public class CawlCreateRequest {
 
