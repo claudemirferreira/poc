@@ -70,7 +70,6 @@ public class CawlService {
             System.out.println("Link encontrado: " + link);
 
             // check nesse link tem palavra
-            SingletonService.getInstance(cawlGetResponse);
 
         }
         // seta status done
