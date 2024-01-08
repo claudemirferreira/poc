@@ -1,13 +1,16 @@
 package com.claudemir.backend;
 
+import com.claudemir.backend.exception.NotFoundException;
 import com.claudemir.backend.request.CawlCreateRequest;
 import com.claudemir.backend.service.CawlService;
 import com.google.gson.Gson;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import static spark.Spark.get;
-import static spark.Spark.post;
+import static spark.Spark.*;
 
 public class Main {
+    private static final Logger LOGGER = LoggerFactory.getLogger(CawlService.class);
     public static void main(String[] args) {
 
         final CawlService cawlService = new CawlService();
@@ -25,7 +28,13 @@ public class Main {
 
         get("/crawl/:id", (request, response) -> {
             response.type("application/json");
-            return gson.toJson(cawlService.get(request.params("id")));
+            try {
+              return gson.toJson(cawlService.get(request.params("id")));
+            } catch (NotFoundException e){
+                LOGGER.error("{}", e.getMessage());
+            }
+            response.status(404);
+            return "crawl not found: " + request.params("id");
         });
     }
 

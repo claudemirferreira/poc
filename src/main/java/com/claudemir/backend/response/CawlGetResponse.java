@@ -33,6 +33,8 @@ public class CawlGetResponse {
         this.urls = urls;
     }
 
+    public CawlGetResponse(){}
+
     public CawlGetResponse(String id, String status, List<String> urls) {
         this.id = id;
         this.status = status;
