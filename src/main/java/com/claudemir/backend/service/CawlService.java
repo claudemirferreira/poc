@@ -1,5 +1,6 @@
 package com.claudemir.backend.service;
 
+import com.claudemir.backend.exception.NotFoundException;
 import com.claudemir.backend.request.CawlCreateRequest;
 import com.claudemir.backend.response.CawlCreateResponse;
 import com.claudemir.backend.response.CawlGetResponse;
@@ -22,6 +23,10 @@ public class CawlService {
 
     private String BASE_URL = System.getenv("BASE_URL");
 
+    public CawlService(){
+        instance = SingletonService.getInstance();
+    }
+
     public CawlCreateResponse post(CawlCreateRequest cawlCreateRequest){
         String id = GenerateIdUtil.gerarCodigo();
         findUrl(id);
@@ -34,7 +39,7 @@ public class CawlService {
             LOGGER.info("BASE_URL = {}", BASE_URL);
             if (BASE_URL == null){
                 LOGGER.info("set valeu BASE_URL = {}", BASE_URL);
-                BASE_URL = "https://en.wikipedia.org/";
+                BASE_URL = "http://hiring.axreng.com/";
             }
             try {
                 extractLinks(BufferedReaderUtil.getContent(BASE_URL));
@@ -50,14 +55,7 @@ public class CawlService {
     }
 
     public CawlGetResponse get(String id){
-
-        instance.getList().forEach( x ->{
-            if(x.getId() == id){
-
-            }
-        });
-
-        return new CawlGetResponse("id", "active", List.of("http", "https"));
+       return instance.findById(id);
     }
 
     public void extractLinks(String content) {

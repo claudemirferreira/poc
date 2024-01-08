@@ -7,4 +7,11 @@
    seguir links (absolutos e relativos) em elementos anchor das
    páginas visitadas se e somente se eles possuírem a mesma
    URL base.
-- [ ] 5 A aplicação deve suportar a execução de múltiplas buscas simultâneas. Informações sobre buscas em andamento (status active) ou já concluídas (status done) devem ser mantidas indefinidamente enquanto a aplicação estiver em execução. 
+- [ ] 5 A aplicação deve suportar a execução de múltiplas buscas simultâneas. Informações sobre buscas em andamento (status active) ou já concluídas (status done) devem ser mantidas indefinidamente enquanto a aplicação estiver em execução.
+
+
+## comand
+
+docker build . -t axreng/backend
+
+docker run -e BASE_URL=http://hiring.axreng.com/ -p 4567:4567 --rm axreng/backend

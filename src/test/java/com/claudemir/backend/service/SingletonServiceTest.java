@@ -13,12 +13,13 @@ public class SingletonServiceTest {
 
     @Test
     public void add_cawl(){
+        SingletonService singletonService = SingletonService.getInstance();
         CawlGetResponse cawlGetResponse = new CawlGetResponse("1", "activite", List.of("teste"));
-        SingletonService singletonService = SingletonService.getInstance(cawlGetResponse);
+        SingletonService.add(cawlGetResponse);
         assertEquals(1, singletonService.getList().size());
 
         cawlGetResponse = new CawlGetResponse("2", "done", List.of("http"));
-        singletonService = SingletonService.getInstance(cawlGetResponse);
+        SingletonService.add(cawlGetResponse);
         assertEquals(2, singletonService.getList().size());
     }
 
@@ -26,11 +27,12 @@ public class SingletonServiceTest {
     @Test
     public void find_sucess(){
 
+        SingletonService singletonService = SingletonService.getInstance();
         CawlGetResponse cawlGetResponse = new CawlGetResponse("1", "activite", List.of("teste"));
-        SingletonService singletonService = SingletonService.getInstance(cawlGetResponse);
+        SingletonService.add(cawlGetResponse);
 
         cawlGetResponse = new CawlGetResponse("2", "done", List.of("http"));
-        singletonService = SingletonService.getInstance(cawlGetResponse);
+        SingletonService.add(cawlGetResponse);
 
         CawlGetResponse result = singletonService.findById("2");
         assertEquals("2", result.getId());
@@ -39,10 +41,11 @@ public class SingletonServiceTest {
     @Test
     public void not_found(){
 
+        SingletonService singletonService = SingletonService.getInstance();
         CawlGetResponse cawlGetResponse = new CawlGetResponse("1", "activite", List.of("teste"));
-        SingletonService singletonService = SingletonService.getInstance(cawlGetResponse);
+        SingletonService.add(cawlGetResponse);
         cawlGetResponse = new CawlGetResponse("2", "done", List.of("http"));
-        singletonService = SingletonService.getInstance(cawlGetResponse);
+        SingletonService.add(cawlGetResponse);
 
         try {
             singletonService.findById("3");

@@ -16,11 +16,13 @@ public class SingletonService {
 
     private List<CawlGetResponse> list;
 
-    public static SingletonService getInstance(CawlGetResponse value) {
+    public static void add(CawlGetResponse value) {
+        instance.list.add(value);
+    }
+
+    public static SingletonService getInstance() {
         if (instance == null) {
-            instance = new SingletonService(value);
-        } else {
-            instance.list.add(value);
+            instance = new SingletonService();
         }
         return instance;
     }
@@ -28,6 +30,10 @@ public class SingletonService {
     public SingletonService(CawlGetResponse value) {
         this.list = new ArrayList<>();
         this.list.add(value);
+    }
+
+    public SingletonService() {
+        this.list = new ArrayList<>();
     }
 
     public List<CawlGetResponse> getList() {
