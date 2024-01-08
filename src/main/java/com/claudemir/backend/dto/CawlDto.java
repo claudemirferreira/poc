@@ -1,5 +1,6 @@
 package com.claudemir.backend.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CawlDto {
@@ -47,6 +48,7 @@ public class CawlDto {
 
     public CawlDto(String keyword){
         this.keyword = keyword;
+        this.urls = new ArrayList<>();
     }
 
     public CawlDto(String id, String keyword, String status, List<String> urls) {
