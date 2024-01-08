@@ -1,5 +1,7 @@
 package com.claudemir.backend.service;
 
+import com.claudemir.backend.dto.CawlDto;
+import com.claudemir.backend.enuns.StatusEnum;
 import com.claudemir.backend.exception.NotFoundException;
 import com.claudemir.backend.request.CawlCreateRequest;
 import com.claudemir.backend.response.CawlCreateResponse;
@@ -27,13 +29,13 @@ public class CawlService {
         instance = SingletonService.getInstance();
     }
 
-    public CawlCreateResponse post(CawlCreateRequest cawlCreateRequest){
-        String id = GenerateIdUtil.gerarCodigo();
-        findUrl(id);
-        return new CawlCreateResponse(id);
+    public CawlDto post(CawlDto cawlDto){
+        cawlDto.setId(GenerateIdUtil.gerarCodigo());
+        findUrl(cawlDto);
+        return cawlDto;
     }
 
-    public CompletableFuture<Void> findUrl(String codigo) {
+    public CompletableFuture<Void> findUrl(CawlDto cawlDto) {
         return CompletableFuture.runAsync(() -> {
             LOGGER.info("Iniciando o método assíncrono...");
             LOGGER.info("BASE_URL = {}", BASE_URL);
@@ -42,9 +44,8 @@ public class CawlService {
                 BASE_URL = "http://hiring.axreng.com/";
             }
             try {
-                extractLinks(BufferedReaderUtil.getContent(BASE_URL));
+                extractLinks(BufferedReaderUtil.getContent(BASE_URL), cawlDto);
                 //set status done
-                CawlCreateResponse cawlCreateResponse = new CawlCreateResponse(codigo);
 
             } catch (IOException e) {
                 LOGGER.error("{}", e.getMessage());
@@ -54,14 +55,16 @@ public class CawlService {
         });
     }
 
-    public CawlGetResponse get(String id){
+    public CawlDto get(String id){
        return instance.findById(id);
     }
 
-    public void extractLinks(String content) {
+    public void extractLinks(String content, CawlDto cawlDto) {
         String regex = "\\b(?:https?|ftp):\\/\\/[-A-Z0-9+&@#\\/%?=~_|!:,.;]*[-A-Z0-9+&@#\\/%=~_|]";
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(content);
+        cawlDto.setStatus(StatusEnum.ACTIVE.toString());
+        SingletonService.add(cawlDto);
 
         while (matcher.find()) {
             String link = matcher.group();
@@ -71,6 +74,12 @@ public class CawlService {
 
         }
         // seta status done
+        cawlDto.setStatus(StatusEnum.DONE.name());
+    }
+
+    public void getContent(String url) throws IOException {
+        String content = BufferedReaderUtil.getContent(url);
+
     }
 
 }

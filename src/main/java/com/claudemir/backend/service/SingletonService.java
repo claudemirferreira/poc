@@ -1,5 +1,6 @@
 package com.claudemir.backend.service;
 
+import com.claudemir.backend.dto.CawlDto;
 import com.claudemir.backend.exception.NotFoundException;
 import com.claudemir.backend.response.CawlGetResponse;
 import org.slf4j.Logger;
@@ -14,10 +15,10 @@ public class SingletonService {
 
     private static SingletonService instance;
 
-    private List<CawlGetResponse> list;
+    private List<CawlDto> list;
 
-    public static void add(CawlGetResponse value) {
-        instance.list.add(value);
+    public static void add(CawlDto cawlDto) {
+        instance.list.add(cawlDto);
     }
 
     public static SingletonService getInstance() {
@@ -27,24 +28,24 @@ public class SingletonService {
         return instance;
     }
 
-    public SingletonService(CawlGetResponse value) {
+    public SingletonService(CawlDto cawlDto) {
         this.list = new ArrayList<>();
-        this.list.add(value);
+        this.list.add(cawlDto);
     }
 
     public SingletonService() {
         this.list = new ArrayList<>();
     }
 
-    public List<CawlGetResponse> getList() {
+    public List<CawlDto> getList() {
         return list;
     }
 
-    public void setList(List<CawlGetResponse> list) {
+    public void setList(List<CawlDto> list) {
         this.list = list;
     }
 
-    public CawlGetResponse findById(String value) {
+    public CawlDto findById(String value) {
             return this.list.stream().peek(num -> System.out.println("will filter " + num.getId()))
                     .filter(x -> x.getId().equalsIgnoreCase(value))
                     .findFirst().orElseThrow(() -> new NotFoundException("NOT FOUND ID " + value ));

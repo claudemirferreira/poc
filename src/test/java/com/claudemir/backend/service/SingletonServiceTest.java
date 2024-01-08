@@ -1,5 +1,6 @@
 package com.claudemir.backend.service;
 
+import com.claudemir.backend.dto.CawlDto;
 import com.claudemir.backend.exception.NotFoundException;
 import com.claudemir.backend.response.CawlGetResponse;
 import org.junit.jupiter.api.Assertions;
@@ -14,12 +15,12 @@ public class SingletonServiceTest {
     @Test
     public void add_cawl(){
         SingletonService singletonService = SingletonService.getInstance();
-        CawlGetResponse cawlGetResponse = new CawlGetResponse("1", "activite", List.of("teste"));
-        SingletonService.add(cawlGetResponse);
+        CawlDto cawlDto = new CawlDto("1", "linux", "activite", List.of("teste"));
+        SingletonService.add(cawlDto);
         assertEquals(1, singletonService.getList().size());
 
-        cawlGetResponse = new CawlGetResponse("2", "done", List.of("http"));
-        SingletonService.add(cawlGetResponse);
+        cawlDto = new CawlDto("2", "linux", "done", List.of("http"));
+        SingletonService.add(cawlDto);
         assertEquals(2, singletonService.getList().size());
     }
 
@@ -28,13 +29,13 @@ public class SingletonServiceTest {
     public void find_sucess(){
 
         SingletonService singletonService = SingletonService.getInstance();
-        CawlGetResponse cawlGetResponse = new CawlGetResponse("1", "activite", List.of("teste"));
-        SingletonService.add(cawlGetResponse);
+        CawlDto cawlDto = new CawlDto("1", "linux", "activite", List.of("teste"));
+        SingletonService.add(cawlDto);
 
-        cawlGetResponse = new CawlGetResponse("2", "done", List.of("http"));
-        SingletonService.add(cawlGetResponse);
+        cawlDto = new CawlDto("2", "linux", "done", List.of("http"));
+        SingletonService.add(cawlDto);
 
-        CawlGetResponse result = singletonService.findById("2");
+        CawlDto result = singletonService.findById("2");
         assertEquals("2", result.getId());
     }
 
@@ -42,10 +43,10 @@ public class SingletonServiceTest {
     public void not_found(){
 
         SingletonService singletonService = SingletonService.getInstance();
-        CawlGetResponse cawlGetResponse = new CawlGetResponse("1", "activite", List.of("teste"));
-        SingletonService.add(cawlGetResponse);
-        cawlGetResponse = new CawlGetResponse("2", "done", List.of("http"));
-        SingletonService.add(cawlGetResponse);
+        CawlDto cawlDto = new CawlDto("1","linux", "activite", List.of("teste"));
+        SingletonService.add(cawlDto);
+        cawlDto = new CawlDto("2","linux", "done", List.of("http"));
+        SingletonService.add(cawlDto);
 
         try {
             singletonService.findById("3");
